@@ -5,6 +5,7 @@ Created on Oct 29, 2014
 '''
 
 import numpy as np
+import matplotlib.pyplot as plt
 
 class Demo():
     '''
