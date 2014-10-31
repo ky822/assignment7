@@ -5,27 +5,6 @@ In <demos.py> :
     The file contains subclasses inherited from the original base class Demo, each subclass
     is specified to generate arrays or calculate results according to the requirements of 
     the corresponding questions
-    
-    In class DemoOne:
-    >>>
-    Methods:
-        __rowGenerationDemo() :
-        __columnGenerationDemo() :
-        __areaGenerationDemo() :
-        __boundedValueDemo() :     
-    
-    In class DemoOne:
-    >>>
-    Methods:
-        __divideElementwiseDemo() :
-        
-    In class DemoThree:
-    >>>
-    Methods:
-        __pickTheClosestDemo() :
-        __pickTheClosestDemo2() :
-        
-    In class DemoFour:
 
 @author: luchristopher
 '''
@@ -37,12 +16,18 @@ from matplotlib import *
 
 class DemoOne(Demo):
     '''
-    classdocs
+    In class DemoOne:
+    >>>
+    Methods:
+        __rowGenerationDemo() : solve question 1-a
+        __columnGenerationDemo() : solve question 1-b
+        __areaGenerationDemo() : solve question 1-c
+        __boundedValueDemo() :   solve question 1-d
     '''
 
     def __init__(self):
         '''
-        Constructor
+        Constructor : generate an 5 by 3 array as described
         '''
         self._the_array = np.zeros((5,3),dtype = np.int64)
         for i in range(5):
@@ -78,7 +63,10 @@ class DemoOne(Demo):
 
 class DemoTwo(Demo):
     '''
-    classdocs
+    In class DemoTwo:
+    >>>
+    Methods:
+        __divideElementwiseDemo() : solve question 2 using the broadcast regime
     '''
 
     def __init__(self):
@@ -100,7 +88,12 @@ class DemoTwo(Demo):
 
 class DemoThree(Demo):
     '''
-    classdocs
+    In class DemoThree:
+    >>>
+    Methods:
+        __pickTheClosestDemo() : Picking the values that are closest to 0.5 in each row without using more convenient numpy argmin() 
+                                and absolute() method instead of abs() and argsort()
+        __pickTheClosestDemo2() : Do the same task using abs() and argsort()
     '''
     
     def __init__(self):
@@ -116,7 +109,10 @@ class DemoThree(Demo):
     
     def __pickTheClosestDemo2(self):
         '''Picking the values that are closest to 0.5 in each row using abs() and argsort()'''
-        pass
+        rearranged_array = abs(self._the_array-0.5).min(axis=1)
+        selection_array_row = np.arange(10)
+        selection_array_column = abs(self._the_array - 0.5).argsort()[:, 0].flatten()
+        return self._the_array[selection_array_row,selection_array_column]
     
     def demoShow(self):
         print '------------------QUESTION 3-----------------------\n'
@@ -124,17 +120,25 @@ class DemoThree(Demo):
         self._displayArrayDemo()
         print 'The values in each row that are closest to 0.5 are:(from row 0 to 9)'
         print self.__pickTheClosestDemo()
+        print 'The values in each row that are closest to 0.5: (calculated by abs() and argsort()'
+        print self.__pickTheClosestDemo2()
         print '\n'
         
 class DemoFour(Demo):
-    
+    '''
+    In class DemoFour:
+    >>>
+    Methods : 
+        __updateArrayDemo() : initialize and calculate the mandelbrot iterations
+        __imageShowDemo() : plot and save the image
+    '''
     
     def __updateArrayDemo(self):
         iterator = MandelbrotIterator(params=[-2,1,-1.5,1.5],steps=[300,300],N_max=50)
         self._the_array = iterator.getValue()
         
     def __imageShowDemo(self,threshold=50):
-        '''Show and save image to \'mandelbrot.png\''''
+        '''Create a boolean mask for items in mandelbrot set and show/save image to \'mandelbrot.png\''''
         mask = np.absolute(self._the_array) < threshold
         #plt.ioff()
         fig = plt.figure()

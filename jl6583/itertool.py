@@ -1,6 +1,9 @@
 '''
 Created on Oct 29, 2014
 
+In <itertool.py>:
+    Contains the definition of the base iterator class NumericalIterator and the inherited class MandelbrotIterator
+
 @author: luchristopher
 '''
 
@@ -9,11 +12,7 @@ from userexcps import *
 
 class NumericalIterator():
     '''
-    In class NumericalIterator1D:
-    >>>
-    Attributes:
-        __iter_array : The array containing the result of the iteration
-        __max_iterations: The maximum number of iterations
+    Base class for numerical iterators (Inheritance is used in this case for possible future extensions
     '''
 
     def __init__(self):
@@ -27,6 +26,11 @@ class NumericalIterator():
 class MandelbrotIterator(NumericalIterator):
     '''
     In class MandelbrotIterator:
+    >>>
+    Attributes:
+        __compute() : Main loop for Mandelbrot Iteration
+        getValue() : Interface for external access to the result of iteration
+        
     '''
     
     def __init__(self, params, steps, N_max):
@@ -46,10 +50,16 @@ class MandelbrotIterator(NumericalIterator):
         self.__c = self._iter_array
         
     def __compute(self):
+        '''
+        Main loop for Mandelbrot Iterations
+        '''
         for v in range(self.__max_iterations):
             self._iter_array = self._iter_array**2 + self.__c
             
     def getValue(self):
+        '''
+        Interface for external access to the result of iteration
+        '''
         self.__compute()
         return self._iter_array
     
