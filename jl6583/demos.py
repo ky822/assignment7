@@ -12,7 +12,7 @@ from demo import *
 from itertool import *
 from matplotlib import *
 
-
+import sys
 
 class DemoOne(Demo):
     '''
@@ -134,7 +134,11 @@ class DemoFour(Demo):
     '''
     
     def __updateArrayDemo(self):
-        iterator = MandelbrotIterator(params=[-2,1,-1.5,1.5],steps=[300,300],N_max=50)
+        try:
+            iterator = MandelbrotIterator(params=[-2,1,-1.5,1.5],steps=[300,300],N_max=50)
+        except (ParameterFormatError,ParameterTypeError):
+            print >> sys.stderr, 'Unexpected Parameters\n'
+            sys.exit()
         self._the_array = iterator.getValue()
         
     def __imageShowDemo(self,threshold=50):
