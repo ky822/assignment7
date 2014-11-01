@@ -23,7 +23,10 @@ def main():
     print """===================================
             question4
 ==================================="""
-    question4.mandelbrot()
+    try:
+        question4.mandelbrot()
+    except:
+        pass
     
 if __name__ == "__main__":
     main()
