@@ -1,5 +1,10 @@
 from package import *
-problem1()
-problem2()
-problem3()
-problem4()
+def main():
+    problem1()
+    problem2()
+    problem3()
+    problem4()
+
+if __name__=='__main__':
+    main()
+
