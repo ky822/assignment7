@@ -1,0 +1,13 @@
+#top level file that will prints out answers of this Assignment
+from assigment7package.Problem1 import *
+from assigment7package.Problem2 import *
+from assigment7package.Problem3 import *
+from assigment7package.Problem4 import *
+
+GenerateNew()
+
+ElementWise()
+
+Find_closest()
+
+Mandelbrot()
