@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import itertools 
 
 
-''' granularity of the grid, if not inputed by user, default to 100x100'''
+''' granularity of the grid, if not inputed by user, default to 1000x1000'''
 
 def Mandelbrot(rows= 1000, cols = 1000):
     print " **** Question 4 ****"
