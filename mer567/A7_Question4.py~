@@ -1,0 +1,39 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import itertools 
+
+
+''' granularity of the grid, if not inputed by user, default to 1000x1000'''
+
+def Mandelbrot(rows= 1000, cols = 1000):
+    print " **** Question 4 ****"
+    print "Please wait patiently while the calculation is underway."
+    
+    #initialize grid and params
+
+    threshold = 50
+    N_max = 50
+    x = np.linspace(-2,1,cols)
+    y = np.linspace(-1.5, 1.5,rows)
+    mask = np.ones((rows,cols))
+
+    x_elements, y_elements = np.meshgrid(x,y)
+
+    C = x_elements + 1j*y_elements
+
+    #initialize
+    Z = C
+
+    # ignore runtime\overflow error. we can do this since we do not care about about the actual entries of z besides diverging\not diverging.
+    np.seterr(all='ignore')
+
+    # loop and change mask. 
+    for v in range(N_max):
+        Z = Z**2 + C
+        mask = mask*(np.abs(Z)<threshold)
+
+    plt.imshow(mask, extent=[-2, 1, -1.5, 1.5])
+    plt.gray()
+    plt.savefig('mandelbrot.png')
+
+Mandelbrot()
