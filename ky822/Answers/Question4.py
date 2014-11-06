@@ -16,7 +16,7 @@ def Question4():
     grid_number = 400
     x = np.linspace(-2,1,grid_number)
     y = np.linspace(-1.5,1.5,grid_number)
-    c = x[newaxis,:] + 1j*y[:,newaxis]
+    c = x[:,np.newaxis] + 1j*y[np.newaxis,:]
     
     # b. Do the iteration
     N_max = 50
